@@ -74,6 +74,9 @@ The discovery that cbd_dist_km is the #2 driver while mrt_dist_km is near the bo
 * People does not care whether the MRT is close to their flat or not, but it has to be near the CBD area like Queenstown, Outram Park, etc.
 * People loves staying high up because they enjoy the view, away from ground-floor, less noisy, etc. These three features means people are willing to throw in more cash for it.
 * Finally, I saved as a pkl file and uploaded to GitHub Repo. Ready to be deployed.
+* It was a simple linear regression sort of project, but I used other models like XGBoost and Random Forest, because in my experience, they perform better than the standard linear regression.
+* I learned something new - Geocoding, I had to create a new API key to be able to use the free Geocoding. It was a good learning experience.
+* This is a Data Science project for my own portfolio.
 
 <br>
 <br>
