@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import requests
+import math
 
 # This is the page config
 st.set_page_config(page_title="HDB Price Intelligence", page_icon='🏢', layout='centered')
@@ -13,6 +15,23 @@ Estimate the resale value of an HDB flat using my XGBoost machine learning model
 Adjust the key property features below to see how they impact the final valuation.
 """)
 
+# This is the constants for the Distance Calculation, this is the Raffles Place MRT estimated coordinates
+cbd_coords = (1.2830, 103.8513)
+
+# Other MRTs coordinates
+mrt_stations = {
+  "Jurong East": (1.331, 103.7423),
+  "Woodlands": (1.4369, 103.7865),
+  "Bishan": (1.3508, 103.8481),
+  "Tampines": (1.3533, 103.9452),
+  "Paya Lebar": (1.3178, 103.8924),
+  "Clementi": (1.3151, 103.7652),
+  "Serangoon": (1.3500, 103.8736),
+  "Outram Park": (1.2804, 103.8395)
+}
+
+# Continue the Helper Function from here tomorrow
+
 # This loads the model
 # This uses st.cache_resource so the model loads only once
 @st.cache_resource
@@ -20,7 +39,7 @@ def load_model():
   return joblib.load('models/hdb_price_model.pkl')
 
 try:
-  model = load.model()
+  model = load_model()
   model_loaded = True
 except Exception as e:
   st.error(f"Error loading model: {e}")
