@@ -114,7 +114,7 @@ if address_input:
     # Also added the auto calculation for cbd, lat, lon, and mrt distance
     input_data = pd.DataFrame({
       'year': [year],
-      'month_val': [month_val,
+      'month_val': [month_val],
       'time_index': [time_index],
       'mid_storey': [mid_storey],
       'lease_numeric': [lease_numeric],
