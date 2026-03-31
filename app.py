@@ -99,6 +99,10 @@ if address_input.strip():
 
     st.info(f"📍 Distance to CBD: **{calc_cbd_dist:.2f} km** | 🚇 Nearest MRT: **{calc_mrt_dist:.2f} km**")
 
+    # This is our Visual Map for showing users where exactly is this coordinates
+    map_data = pd.DataFrame({'lat': [lat], 'lon': [lon]})
+    st.map(map_data, zoom=14, use_container_width=True)
+
     st.header("2. Property Details")
     col1, col2 = st.columns(2)
 
