@@ -37,10 +37,11 @@ def get_coordinates(search_val):
   if response.status_code == 200:
     data = response.json()
     if data['found'] > 0:
-      lat = float(data['results'][0]['LATITUDE'])
-      lon = float(data['results'][0]['LONGITUDE'])
-      return lat, lon
-  return None, None
+      lat = float(data['results']['LATITUDE'])
+      lon = float(data['results']['LONGITUDE'])
+      address = result['ADDRESS']
+      return lat, lon, address
+  return None, None, None
 
 # This is the Haversine Helper Function to calculate the distance in km based on lat and lon
 def haversine(coord1, coord2):
@@ -84,10 +85,12 @@ address_input = st.text_input("Enter the HDB Address or Postal Code (e.g., '310B
 
 if address_input.strip():
   with st.spinner("Geocoding via OneMap API..."):
-    lat, lon = get_coordinates(address_input)
+    lat, lon, found_address = get_coordinates(address_input)
 
-  if lat is not None and lon is not None:
-    st.success(f"Location Found! Coordinates: {lat:.4f}, {lon:.4f}")
+  # This will show the user what the search actually found
+  if lat and lon:
+    st.success(f"Location Found: **{found_address}**")
+    st.caption(f"Coordinates: **{lat:.4f}, {lon:.4f}**")
 
     # This will auto calculate the distance using our two helper functions
     calc_cbd_dist = haversine((lat, lon), cbd_coords)
