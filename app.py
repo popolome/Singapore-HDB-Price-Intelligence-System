@@ -30,7 +30,40 @@ mrt_stations = {
   "Outram Park": (1.2804, 103.8395)
 }
 
-# Continue the Helper Function from here tomorrow
+# This is the OneMap Helper Function to fetch lat and long from OneMap API
+def get_coordinates(search_val):
+  url = f"https://www.onemap.gov.sg/api/common/elastic/search?searchVal={search_val}&returnGeom=Y&getAddrDetails=Y&pageNum=1"
+  response = requests.get(url)
+  if reponse.status_code == 200:
+    data = response.json()
+    if data['found'] > 0:
+      lat = float(data['results'][0]['LATITUDE'])
+      lon = float(data['results'][0]['LONGITUDE'])
+      return lat, lon
+  return None, None
+
+# This is the Haversine Helper Function to calculate the distance in km based on lat and lon
+def haversine(coord1, coord2):
+  R = 6371.0 # This is the earth's radius in km
+  lat1, lon1 = math.radians(coord1[0]), math.radians(coord1[1])
+  lat2, lon2 = math.radians(coord2[0]), math.radians(coord2[1])
+
+  dlat = lat2 - lat1
+  dlon = lon2 - lon1
+
+  a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+  c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+  return R * c
+
+# This is the MRT Helpder Function to find the nearest MRT in our dictionary based on distance
+def get_nearest_mrt(lat, lon):
+  min_dist = float('inf')
+  for name, coords in mrt_stations.items():
+    dist = haversine((lat, lon), coords)
+    if dist < min_dist:
+      min_dist = dist
+  return min_dist
 
 # This loads the model
 # This uses st.cache_resource so the model loads only once
@@ -46,47 +79,60 @@ except Exception as e:
   model_loaded = False
 
 # This is the user input
-st.header("Property Details")
+st.header("1. Find the Property")
+address_input = st.text_input("Enter the HDB Address or Postal Code (e.g., '310B Punggol Walk' or '822310')")
 
-col1, col2 = st.columns(2)
+if address_input:
+  with st.spinner("Geocoding via OneMap API..."):
+    lat, lon = get_coordinates(address_input)
 
-with col1:
-  floor_area_sqm = st.number_input("Floor Area (sqm)", min_value=30.0, max_value=200.0, value=90.0, step=1.0)
-  mid_storey = st.slider("Storey Level (Mid-point)", min_value=1, max_value=50, value=8)
-  lease_numeric = st.number_input("Remaining Lease (Years)", min_value=1.0, max_value=99.0, value=75.0, step=1.0)
+  if lat, lon:
+    st.success(f"Location Found! Coordinates: {lat:.4f}, {lon:.4f}")
 
-with col2:
-  cbd_dist_km = st.number_input("Distance to CBD (km)", min_value=0.0, max_value=30.0, value=5.5, step=0.1)
-  mrt_dist_km = st.number_input("Nearest MRT (km)", min_value=0.0, max_value=10.0, value=0.8, step=0.1)
-  time_index = st.number_input("Time Index (e.g. 2026)", min_value=1, max_value=500, value=250, step=1)
+    # This will auto calculate the distance using our two helper functions
+    calc_cbd_dist = haversine((lat, lon), cbd_coords)
+    calc_mrt_dist = get_nearest_mrt(lat, lon)
 
-# This will ensure that year, lat, long, and month_val have default values if needed by the model
-year = 2026
-latitude = 1.3521
-longitude = 103.8198
-month_val = 3
+    st.info(f"📍 Distance to CBD: **{calc_cbd_dist:.2f} km** | 🚇 Nearest MRT: **{calc_mrt_dist:.2f} km**")
 
-# This will create the DataFrame for prediction
-input_data = pd.DataFrame({
-  'floor_area_sqm': [floor_area_sqm],
-  'cbd_dist_km': [cbd_dist_km],
-  'mid_storey': [mid_storey],
-  'time_index': [time_index],
-  'lease_numeric': [lease_numeric],
-  'year': [year],
-  'latitude': [latitude],
-  'longitude': [longitude],
-  'mrt_dist_km': [mrt_dist_km],
-  'month_val': [month_val]
-})
+    st.header("2. Property Details")
+    col1, col2 = st.columns(2)
 
-# This is the prediction button
-st.markdown("---")
-if st.button("Calculate Value", type="primary"):
-  if st.model_loaded:
-    # This will re-order to match the model's expectation
-    prediction = model.predict(input_data)
-    st.success(f"### Estimated Resale Value: SGD ${int(prediction[0]):,}")
-    st.info("💡 Insight: Floor area and distance to the CBD are the largest driving factors for this valuation.")
+    with col1:
+      floor_area_sqm = st.number_input("Floor Area (sqm)", min_value=30.0, max_value=200.0, value=90.0, step=1.0)
+      mid_storey = st.slider("Storey Level (Mid-point)", min_value=1, max_value=50, value=8)
+    
+    with col2:
+      lease_numeric = st.number_input("Remaining Lease (Years)", min_value=1.0, max_value=99.0, value=75.0, step=1.0)
+      time_index = st.number_input("Time Index (Months since start)", min_value=1, max_value=500, value=250, step=1)
+
+    # These are required by the model but I will just use today's date
+    year = 2026
+    month_val = 3
+
+    # This will create the DataFrame for prediction
+    # Also added the auto calculation for cbd, lat, lon, and mrt distance
+    input_data = pd.DataFrame({
+      'floor_area_sqm': [floor_area_sqm],
+      'cbd_dist_km': [calc_cbd_dist],
+      'mid_storey': [mid_storey],
+      'time_index': [time_index],
+      'lease_numeric': [lease_numeric],
+      'year': [year],
+      'latitude': [lat],
+      'longitude': [lon],
+      'mrt_dist_km': [calc_mrt_dist],
+      'month_val': [month_val]
+    })
+
+    # This is the prediction button
+    st.markdown("---")
+    if st.button("Calculate Value", type="primary"):
+      if st.model_loaded:
+        prediction = model.predict(input_data)
+        st.success(f"### Estimated Resale Value: SGD ${int(prediction[0]):,}")
+        st.info("💡 Insight: Floor area and distance to the CBD are the largest driving factors for this valuation.")
+      else:
+        st.warning("Model not found. Please ensure it is uploaded correctly in the repository.")
   else:
-    st.warning("Model not found. Please ensure it is uploaded correctly in the repository.")
+      st.error("Address not found on OneMap. Please try a different query.")
