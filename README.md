@@ -7,6 +7,27 @@ An AI-driven predictive modeling system designed to estimate HDB resale prices w
 This project predicts Singapore HDB resale prices by analyzing over 150,000 transaction records and enriching them with geospatial features. By calculating proximity to the Central Business District (CBD) and the nearest MRT stations, the model identifies the true economic drivers behind property valuation.
 
 <br>
+<br>
+
+# Examples in Action
+**1. First look of how the app looks like**
+<img width="1920" height="988" alt="image" src="https://github.com/user-attachments/assets/5596a478-c4d4-4f5b-bb2f-21a0ceb450f4" />
+
+<br>
+<br>
+
+**2. Searching for the new Tenga Plantation Crescent to see how much its resale price cost**
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/13f916ed-c746-414b-9e7b-f94b455633b2" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df9ceb60-a74e-40d5-86cf-83b81cc77ab4" />
+
+<br>
+<br>
+
+**3. Adjusting the Floor Area, Remaining Lease, and Storey Level affects the Resale Price**
+<img width="1920" height="988" alt="image" src="https://github.com/user-attachments/assets/a99ffea4-944a-4723-8711-b828ca053017" />
+
+<br>
+<br>
 
 # 📊 Key Insights
 * **Model Performance:** Achieved an R-Squared of 0.95 and a Mean Absolute Error (MAE) of ~$26,220.
