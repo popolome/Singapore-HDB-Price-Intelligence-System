@@ -113,16 +113,16 @@ if address_input:
     # This will create the DataFrame for prediction
     # Also added the auto calculation for cbd, lat, lon, and mrt distance
     input_data = pd.DataFrame({
-      'floor_area_sqm': [floor_area_sqm],
-      'cbd_dist_km': [calc_cbd_dist],
-      'mid_storey': [mid_storey],
-      'time_index': [time_index],
-      'lease_numeric': [lease_numeric],
       'year': [year],
+      'month_val': [month_val,
+      'time_index': [time_index],
+      'mid_storey': [mid_storey],
+      'lease_numeric': [lease_numeric],
+      'floor_area_sqm': [floor_area_sqm],
       'latitude': [lat],
       'longitude': [lon],
       'mrt_dist_km': [calc_mrt_dist],
-      'month_val': [month_val]
+      'cbd_dist_km': [calc_cbd_dist]
     })
 
     # This is the prediction button
