@@ -144,3 +144,12 @@ if address_input.strip():
         st.warning("Model not found. Please ensure it is uploaded correctly in the repository.")
   else:
       st.error("Address not found on OneMap. Please try a different query.")
+
+# This is just my own note at the bottom
+st.markdown("---")
+st.markdown(
+  "<div style='text-align: center; color; grey;'>"
+  "Made by Jun Kit Mak | Powered by XGBoost & OneMap API"
+  "</div>",
+  unsafe_allow_html=True
+)
