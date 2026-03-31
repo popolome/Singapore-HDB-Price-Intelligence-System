@@ -82,7 +82,7 @@ except Exception as e:
 st.header("1. Find the Property")
 address_input = st.text_input("Enter the HDB Address or Postal Code (e.g., '310B Punggol Walk' or '822310')")
 
-if address_input:
+if address_input.strip():
   with st.spinner("Geocoding via OneMap API..."):
     lat, lon = get_coordinates(address_input)
 
