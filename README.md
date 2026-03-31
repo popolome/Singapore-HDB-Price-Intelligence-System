@@ -2,7 +2,10 @@
 
 **Estimate the resale value of HDB flats using an XGBoost Machine Learning model with real-time OneMap API integration.**
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_svg)](https://singapore-hdb-price-intelligence-system.streamlit.app/)
+**Try the Singapore HDB Price Intelligence System App here:**
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://singapore-hdb-price-intelligence-system.streamlit.app/)
+
 
 ---
 
