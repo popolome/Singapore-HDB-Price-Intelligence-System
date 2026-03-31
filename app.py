@@ -38,8 +38,8 @@ def get_coordinates(search_val):
     data = response.json()
     if data['found'] > 0:
       result = data['results'][0]
-      lat = float(data['results']['LATITUDE'])
-      lon = float(data['results']['LONGITUDE'])
+      lat = float(result['LATITUDE'])
+      lon = float(result['LONGITUDE'])
       address = result['ADDRESS']
       return lat, lon, address
   return None, None, None
