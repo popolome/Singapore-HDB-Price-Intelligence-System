@@ -1,13 +1,21 @@
-# Singapore HDB Price Intelligence System
-An AI-driven predictive modeling system designed to estimate HDB resale prices with high precision using XGBoost and OneMap API geospatial data.
+# 🏢 SG HDB Price Intelligence System
 
-<br>
+**Estimate the resale value of HDB flats using an XGBoost Machine Learning model with real-time OneMap API integration.**
 
-# 🚀 Overview
-This project predicts Singapore HDB resale prices by analyzing over 150,000 transaction records and enriching them with geospatial features. By calculating proximity to the Central Business District (CBD) and the nearest MRT stations, the model identifies the true economic drivers behind property valuation.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_svg)](https://singapore-hdb-price-intelligence-system.streamlit.app/)
 
-<br>
-<br>
+---
+
+## 🚀 Overview
+The **SG HDB Price Intelligence System** is an end-to-end data product designed to provide transparent property valuations. By combining a high-performance XGBoost regressor with live geospatial data from the OneMap API, users can enter any Singaporean address to receive an instant valuation based on historical trends, location specifics, and macroeconomic factors.
+
+### Key Features
+* **Smart Address Fetching:** Real-time geocoding via OneMap API (handles postal codes and building names).
+* **Geospatial Intelligence:** Automated calculation of distance to CBD and the nearest MRT station.
+* **Predictive Modeling:** Powered by XGBoost, achieving a 95% R-Squared accuracy on historical data.
+* **Interactive Interface:** Built with Streamlit, featuring interactive maps and dynamic feature adjustment.
+
+---
 
 # Examples in Action
 **1. First look of how the app looks like**
@@ -27,29 +35,35 @@ This project predicts Singapore HDB resale prices by analyzing over 150,000 tran
 <img width="1920" height="988" alt="image" src="https://github.com/user-attachments/assets/a99ffea4-944a-4723-8711-b828ca053017" />
 
 <br>
-<br>
 
-# 📊 Key Insights
-* **Model Performance:** Achieved an R-Squared of 0.95 and a Mean Absolute Error (MAE) of ~$26,220.
+## 🏗️ How It Works
+1.  **Input:** User enters an address or postal code.
+2.  **Geocoding:** The system fetches Latitude/Longitude from OneMap.
+3.  **Feature Engineering:** Python scripts calculate the Haversine distance to Raffles Place (CBD) and major MRT hubs.
+4.  **Inference:** The processed features are fed into the pre-trained `.pkl` model.
+5.  **Output:** An estimated resale price is displayed along with a localized map view.
 
-* **Top Value Drivers:** Floor area, distance to CBD, and storey height were identified as the most critical features affecting price.
+---
 
-* **The "Standard Utility" Effect:** Contrary to popular belief, MRT proximity had a lower impact on price variance compared to centrality, suggesting MRT access is a baseline expectation rather than a luxury premium.
-
-<br>
-
-# 🛠️ Technical Stack
-* **Modeling:** XGBoost, Scikit-Learn
-
+## 🛠️ Tech Stack
+* **Frontend:** [Streamlit](https://streamlit.io/)
+* **Machine Learning:** XGBoost, Scikit-learn, Joblib
+* **Data Processing:** Python, Pandas, NumPy, SQL Server (T-SQL)
 * **Geospatial:** OneMap API, Haversine Formula
 
-* **Data:** Pandas, Numpy
+---
 
-* **Visualization:** Seaborn, Matplotlib
+## 📊 Model Performance & Insights
+The model was trained on a comprehensive dataset of HDB resale transactions. Through rigorous feature engineering, the following insights were derived:
 
-<br>
+* **Accuracy:** Mean Absolute Error (MAE) of ~$26,220 with an **R² of 0.95**.
+* **Top Drivers:** 1. **Floor Area (sqm):** The strongest predictor of total price.
+    2. **CBD Distance:** Proximity to the central core significantly premiums the valuation.
+    3. **Storey Level:** Higher floors consistently correlate with higher resale values.
 
-# 📈 Visualizations
+---
+
+## 📈 Visualizations
 Figure 1: Leaderboards of the models after training, XGBoost, Random Forest, and Linear Regression.
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/8ee8cffc-1bd1-4ef9-b980-25f18beb26de" />
 
@@ -64,21 +78,31 @@ Figure 2: Relative Importance of features in the XGBoost model.
 Figure 3: Correlation/Heatmap Importance of features in the XGBoost model.
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/dda80dd6-8696-49ee-a31f-b1e191ad29aa" />
 
+---
 
+## 🔧 Installation & Setup
+To run this project locally:
 
-# 📂 How to Run
-1. Clone the repository.
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/popolome/Singapore-HDB-Price-Intelligence-System.git](https://github.com/popolome/Singapore-HDB-Price-Intelligence-System.git)
 
-2. Install dependencies: pip install -r requirements.txt
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
 
-3. Run the notebook to see the data processing pipeline and model training.
+2. Launch the app:
+   ```bash
+   streamlit run app.py
 
-<br>
+---
 
-# ✨ My Summary
+## ✨ My Summary
 **XGBoost is the clear winner with a Mean Absolute Error (MAE) of ~$26,220.** This suggests that on average, our model is within 4-5% of the actual transaction price, proving it is highly reliable for valuation. The 95% R-Squared indicates that our selected features capture nearly all the variance in HDB pricing, with only 5% attributed to unobserved factors like interior renovation quality or buyer sentiment.
 
 The discovery that cbd_dist_km is the #2 driver while mrt_dist_km is near the bottom is a significant market insight. **It suggests that in modern Singapore, "Centrality" is a luxury, while "MRT Access" is now considered a standard utility that is already baked into almost every HDB location.**
+
+---
 
 # 📝 Key Notes from me
 * I tried to use the resource_id to scrape the historical data from Data.gov.sg of HDB resale pricing, but was hit with their rate limit. Error 429.
