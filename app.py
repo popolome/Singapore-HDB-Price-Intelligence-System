@@ -37,6 +37,7 @@ def get_coordinates(search_val):
   if response.status_code == 200:
     data = response.json()
     if data['found'] > 0:
+      result = data['results'][0]
       lat = float(data['results']['LATITUDE'])
       lon = float(data['results']['LONGITUDE'])
       address = result['ADDRESS']
