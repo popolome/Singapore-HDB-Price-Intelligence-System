@@ -34,7 +34,7 @@ mrt_stations = {
 def get_coordinates(search_val):
   url = f"https://www.onemap.gov.sg/api/common/elastic/search?searchVal={search_val}&returnGeom=Y&getAddrDetails=Y&pageNum=1"
   response = requests.get(url)
-  if reponse.status_code == 200:
+  if response.status_code == 200:
     data = response.json()
     if data['found'] > 0:
       lat = float(data['results'][0]['LATITUDE'])
@@ -86,7 +86,7 @@ if address_input:
   with st.spinner("Geocoding via OneMap API..."):
     lat, lon = get_coordinates(address_input)
 
-  if lat, lon:
+  if lat is not None and lon is not None:
     st.success(f"Location Found! Coordinates: {lat:.4f}, {lon:.4f}")
 
     # This will auto calculate the distance using our two helper functions
@@ -128,11 +128,11 @@ if address_input:
     # This is the prediction button
     st.markdown("---")
     if st.button("Calculate Value", type="primary"):
-      if st.model_loaded:
+      if model_loaded:
         prediction = model.predict(input_data)
         st.success(f"### Estimated Resale Value: SGD ${int(prediction[0]):,}")
         st.info("💡 Insight: Floor area and distance to the CBD are the largest driving factors for this valuation.")
       else:
         st.warning("Model not found. Please ensure it is uploaded correctly in the repository.")
-  else:
-      st.error("Address not found on OneMap. Please try a different query.")
+else:
+    st.error("Address not found on OneMap. Please try a different query.")
