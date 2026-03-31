@@ -134,5 +134,5 @@ if address_input.strip():
         st.info("💡 Insight: Floor area and distance to the CBD are the largest driving factors for this valuation.")
       else:
         st.warning("Model not found. Please ensure it is uploaded correctly in the repository.")
-else:
-    st.error("Address not found on OneMap. Please try a different query.")
+  else:
+      st.error("Address not found on OneMap. Please try a different query.")
