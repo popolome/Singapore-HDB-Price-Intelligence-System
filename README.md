@@ -67,7 +67,7 @@ The **SG HDB Price Intelligence System** is an end-to-end data product designed 
 ## 🛠️ Tech Stack
 * **Frontend:** [Streamlit](https://streamlit.io/)
 * **Machine Learning:** XGBoost, Scikit-learn, Joblib
-* **Data Processing:** Python, Pandas, NumPy, SQL Server (T-SQL)
+* **Data Processing:** Python, Pandas, NumPy
 * **Geospatial:** OneMap API, Haversine Formula
 
 ---
