@@ -1,4 +1,6 @@
 # 🏢 SG HDB Price Intelligence System
+![HDB_Price_Intelligence_System_Thumbnail](https://github.com/user-attachments/assets/5361c323-39c5-406b-b1c8-b1a69faf9905)
+
 
 **Estimate the resale value of HDB flats using an XGBoost Machine Learning model with real-time OneMap API integration.**
 
