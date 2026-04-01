@@ -53,7 +53,7 @@ The **SG HDB Price Intelligence System** is an end-to-end data product designed 
 **3. Adjusting the Floor Area, Remaining Lease, and Storey Level affects the Resale Price**
 <img width="1920" height="988" alt="image" src="https://github.com/user-attachments/assets/a99ffea4-944a-4723-8711-b828ca053017" />
 
-<br>
+---
 
 ## 🏗️ How It Works
 1.  **Input:** User enters an address or postal code.
