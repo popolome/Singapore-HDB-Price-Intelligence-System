@@ -43,7 +43,7 @@ The **SG HDB Price Intelligence System** is an end-to-end data product designed 
 <br>
 <br>
 
-**2. Searching for the new Tenga Plantation Crescent to see how much its resale price cost**
+**2. Searching for the new Tengah Plantation Crescent to see how much its resale price cost**
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/13f916ed-c746-414b-9e7b-f94b455633b2" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/df9ceb60-a74e-40d5-86cf-83b81cc77ab4" />
 
