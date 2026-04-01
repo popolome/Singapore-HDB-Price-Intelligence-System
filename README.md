@@ -18,6 +18,22 @@ The **SG HDB Price Intelligence System** is an end-to-end data product designed 
 * **Predictive Modeling:** Powered by XGBoost, achieving a 95% R-Squared accuracy on historical data.
 * **Interactive Interface:** Built with Streamlit, featuring interactive maps and dynamic feature adjustment.
 
+<br>
+
+![HDB_1](https://github.com/user-attachments/assets/7274b581-051f-4304-91ba-5d7758790345)
+
+<br>
+
+![HDB_2](https://github.com/user-attachments/assets/1938b056-0ca4-42ec-a75a-da612b7d2aa1)
+
+<br>
+
+![HDB_3](https://github.com/user-attachments/assets/28355830-dcf8-43c1-9527-85d385487012)
+
+<br>
+
+![HDB_4](https://github.com/user-attachments/assets/6a44faf3-e799-45db-94e2-a8aa4fb6752d)
+
 ---
 
 # Examples in Action
