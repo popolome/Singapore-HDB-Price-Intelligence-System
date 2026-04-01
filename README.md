@@ -76,9 +76,10 @@ The **SG HDB Price Intelligence System** is an end-to-end data product designed 
 The model was trained on a comprehensive dataset of HDB resale transactions. Through rigorous feature engineering, the following insights were derived:
 
 * **Accuracy:** Mean Absolute Error (MAE) of ~$26,220 with an **R² of 0.95**.
-* **Top Drivers:** 1. **Floor Area (sqm):** The strongest predictor of total price.
-    2. **CBD Distance:** Proximity to the central core significantly premiums the valuation.
-    3. **Storey Level:** Higher floors consistently correlate with higher resale values.
+* **Top Drivers:**
+  1. **Floor Area (sqm):** The strongest predictor of total price.
+  2. **CBD Distance:** Proximity to the central core significantly premiums the valuation.
+  3. **Storey Level:** Higher floors consistently correlate with higher resale values.
 
 ---
 
